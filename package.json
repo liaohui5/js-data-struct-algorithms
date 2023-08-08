@@ -1,0 +1,17 @@
+{
+  "name": "js-datasturct",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest",
+    "dev": "vite . --port=8080"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^4.4.6",
+    "vitest": "^0.33.0"
+  }
+}
