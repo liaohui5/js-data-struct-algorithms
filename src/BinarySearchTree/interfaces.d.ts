@@ -7,8 +7,9 @@ interface TreeNode<T> {
 
 interface BinarySearchTreeInterface<T> {
   rootNode: TreeNode<T> | null;
-  static from<U>(items: Iterable<U>): BinarySearchTreeInterface<U>;
   createTreeNode(key: number, value: T): TreeNode<T>;
+  keys(): Array<number>;
+  values(): Array<T>;
   hasKey(key: number): boolean;
   hasValue(value: T): boolean;
   insert(): void;

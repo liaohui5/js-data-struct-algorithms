@@ -12,7 +12,7 @@ export default class Stack<T> {
    * @param items
    * @returns Stack<T>
    */
-  public static from<U>(items: Array<U> | Set<U>): Stack<U> {
+  public static from<U>(items: Iterable<U>): Stack<U> {
     const stack = new Stack<U>();
     for (const item of items) {
       stack.push(item);

@@ -74,7 +74,7 @@ export default class Queue<T> {
    * @param items 队列元素
    * @returns
    */
-  public static from<U>(items: Array<U> | Set<U>): Queue<U> {
+  public static from<U>(items: Iterable<U>): Queue<U> {
     const queue = new Queue<U>();
     for (const item of items) {
       queue.enqueue(item);

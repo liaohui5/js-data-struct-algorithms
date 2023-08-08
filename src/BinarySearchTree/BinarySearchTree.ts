@@ -20,6 +20,20 @@ export default class BinarySearchTree<T> {
   }
 
   /**
+   * values
+   */
+  public values(): Array<T> {
+    const values: Array<T> = [];
+    if (this.rootNode === null) {
+      return values;
+    }
+    this.forEach((item) => {
+      values.push(item.value);
+    });
+    return values;
+  }
+
+  /**
    * 是否包含某个 key
    * @param {number} key
    * @returns {boolean}
@@ -34,17 +48,7 @@ export default class BinarySearchTree<T> {
    * @returns {boolean}
    */
   public hasValue(value: T): boolean {
-    let has: boolean = false;
-    if (this.rootNode === null) {
-      return has;
-    }
-    this.forEach((item) => {
-      if (item.value === value) {
-        has = true;
-        return false;
-      }
-    });
-    return has;
+    return this.values().includes(value);
   }
 
   /**

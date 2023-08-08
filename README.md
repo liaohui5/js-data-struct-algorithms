@@ -32,5 +32,5 @@ https://github.com/trekhleb/javascript-algorithms
 - [ ] 二叉搜索树
 - [ ] 红黑树
 - [ ] 堆
-
-
+- [ ] 红黑树的一些概念补充和代码实现
+- [ ] 反转二叉树
