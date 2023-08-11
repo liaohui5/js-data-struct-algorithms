@@ -12,14 +12,14 @@ describe('Normal Queue', () => {
   });
 
   it('from', () => {
-    const q = Queue.from<string>('abc'.split(''));
+    const q = Queue.from<string>('abc');
     expect(q.items[0]).toBe('a');
     expect(q.items[1]).toBe('b');
     expect(q.items[2]).toBe('c');
   });
 
   it('dequeue', () => {
-    const q = Queue.from<string>('abc'.split(''));
+    const q = Queue.from<string>('abc');
     let element: string = '';
     element = q.dequeue()!;
     expect(element).toBe('a');

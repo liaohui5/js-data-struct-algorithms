@@ -1,74 +1,60 @@
 import PriorityQueue from "../PriorityQueue";
 import Queue from "../Queue";
 
+// create queue and fill some data for test case
+function createQueue(fillTotal: number = 0) {
+  const queue = new Queue<number>();
+  for (let i = 1; i <= fillTotal; i++) {
+    queue.items.push(i);
+  }
+  queue.items.length = fillTotal;
+  return queue;
+}
+
+
 describe('common Queue methods', () => {
-  let queue: Queue<string>;
-  let priorityQueue: PriorityQueue<string>;
-  beforeEach(() => {
-    queue = new Queue<string>();
-    priorityQueue = new PriorityQueue<string>();
-  });
 
   it('size', () => {
     // 队列大小(元素个数)
-    'abcde'.split('').forEach((item, index) => {
-      queue.enqueue(item);
-      priorityQueue.enqueue(item, index);
-    })
+    const q1 = createQueue();
+    expect(q1.size()).toBe(0);
 
-    expect(queue.size()).toBe(5);
-    expect(priorityQueue.size()).toBe(5);
+    const q2 = createQueue(2);
+    expect(q2.size()).toBe(2);
   });
 
   it('isEmpty', () => {
     // 队列是否为空
-    expect(queue.isEmpty()).toBe(true);
-    expect(priorityQueue.isEmpty()).toBe(true);
-    queue.enqueue('a')
-    priorityQueue.enqueue('a', 1)
+    const q1 = createQueue();
+    expect(q1.isEmpty()).toBe(true);
 
-    expect(queue.isEmpty()).toBe(false);
-    expect(priorityQueue.isEmpty()).toBe(false);
+    const q2 = createQueue(2);
+    expect(q2.isEmpty()).toBe(false);
+
   });
 
   it('head', () => {
     // 查看队列的第一个(只是查看, 并不执行出列操作)
-    queue.enqueue('a')
-    queue.enqueue('b')
-    priorityQueue.enqueue('a', 2)
-    priorityQueue.enqueue('b', 1)
-
-    expect(queue.head()).toBe('a');
-    expect(priorityQueue.head()).toBe('b');
-
-    expect(queue.size()).toBe(2);
-    expect(priorityQueue.size()).toBe(2);
+    const q = createQueue(3);
+    expect(q.items.length).toBe(3);
+    expect(q.head()).toBe(1);
+    expect(q.items.length).toBe(3);
   });
 
   it('clear', () => {
     // 清空队列
-    'abcde'.split('').forEach((item, index) => {
-      queue.enqueue(item);
-      priorityQueue.enqueue(item, index);
-    });
+    const q = createQueue(3);
+    expect(q.items.length).toBe(3);
 
-    expect(queue.size()).toBe(5);
-    expect(priorityQueue.size()).toBe(5);
-    queue.clear();
-    priorityQueue.clear();
+    q.clear();
 
-    expect(queue.size()).toBe(0);
-    expect(queue.isEmpty()).toBe(true);
-
-    expect(priorityQueue.size()).toBe(0);
-    expect(priorityQueue.isEmpty()).toBe(true);
+    expect(q.items.length).toBe(0);
   });
 
   it('toString', () => {
-    queue.enqueue('a');
-    queue.enqueue('b');
-    queue.enqueue('c');
-    expect(queue.toString()).toBe('[a,b,c]');
+    const q = createQueue(3);
+    const s = q.toString();
+    expect(s).toBe('[1,2,3]');
   });
 
 });

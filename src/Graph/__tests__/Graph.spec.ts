@@ -1,20 +1,15 @@
 import Graph from "../Graph";
 
 describe('Graph', () => {
-  let graph: Graph<string>;
-
-  beforeEach(() => {
-    graph = new Graph<string>();
-  });
-
-
   it('addVertex', () => {
+    const graph = new Graph<string>();
     expect(graph.vertexes.includes("a")).toBe(false);
     graph.addVertex("a");
     expect(graph.vertexes.includes("a")).toBe(true);
   });
 
   it('removeVertex', () => {
+    const graph = new Graph<string>();
     graph.vertexes = ["a"];
     expect(graph.vertexes.includes("a")).toBe(true);
 
@@ -23,6 +18,7 @@ describe('Graph', () => {
   });
 
   it('addEdge', () => {
+    const graph = new Graph<string>();
     graph.vertexes = ['a', 'b', 'c'];
     graph.vertexes.forEach(item => {
       graph.edges.set(item, []);
@@ -38,6 +34,7 @@ describe('Graph', () => {
   });
 
   it('removeEdge', () => {
+    const graph = new Graph<string>();
     graph.vertexes = ['a', 'b', 'c'];
     graph.edges.set('a', ['b', 'c']);
 

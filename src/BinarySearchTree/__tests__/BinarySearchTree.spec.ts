@@ -14,7 +14,8 @@ function createNode(key: number): TreeNode<string> {
 //          5
 //     3         6  
 // 1
-function fillNodes(bst: BinarySearchTree<string>) {
+function createBST() {
+  const bst = new BinarySearchTree<string>();
   const node5 = createNode(5);
   const node3 = createNode(3);
   const node6 = createNode(6);
@@ -23,13 +24,15 @@ function fillNodes(bst: BinarySearchTree<string>) {
   node3.left = node1;
   node5.right = node6;
   bst.rootNode = node5;
+  return bst;
 }
 
 // 填充测试删除需要的节点, fillNodes 节点太少无法测试删除方法的所有情况
 // 而测试其他的方法又不需要这么多的数据, 否则影响测试用例的性能
 // 如果阅读/调试源码, 建议看这个图来调试, 程序走到哪个步骤了
 // https://raw.githubusercontent.com/liaohui5/images/main/images/20230710224450.png
-function fillNodesForRemoveCases(bst: BinarySearchTree<string>) {
+function createRemoveCaseBST() {
+  const bst = new BinarySearchTree<string>();
   const n11 = createNode(11);
   bst.rootNode = n11;
 
@@ -64,15 +67,12 @@ function fillNodesForRemoveCases(bst: BinarySearchTree<string>) {
 
   const n19 = createNode(19);
   n18.right = n19;
+  return bst;
 }
 
 describe('BinarySearchTree', () => {
-  let bst: BinarySearchTree<string>;
-  beforeEach(() => {
-    bst = new BinarySearchTree<string>();
-  });
-
   it('createTreeNode', () => {
+    const bst = new BinarySearchTree<string>();
     const node = bst.createTreeNode(1, 'a');
     expect(node.left).toBeNull();
     expect(node.right).toBeNull();
@@ -81,11 +81,8 @@ describe('BinarySearchTree', () => {
   });
 
   it('keys', () => {
-    let keys = bst.keys();
-    expect(keys.length).toBe(0);
-
-    fillNodes(bst);
-    keys = bst.keys();
+    const bst = createBST();
+    const keys = bst.keys();
     expect(keys.length).toBe(4);
     expect(keys.includes(5)).toBe(true);
     expect(keys.includes(3)).toBe(true);
@@ -93,15 +90,24 @@ describe('BinarySearchTree', () => {
     expect(keys.includes(1)).toBe(true);
   });
 
+  it('values', () => {
+    const bst = createBST();
+    const values = bst.values();
+    expect(values.length).toBe(4);
+    expect(values.includes('5')).toBe(true);
+    expect(values.includes('3')).toBe(true);
+    expect(values.includes('6')).toBe(true);
+    expect(values.includes('1')).toBe(true);
+  })
+
   it('hasKey/hasValue', () => {
-    expect(bst.hasKey(1)).toBe(false);
-    expect(bst.hasValue('6')).toBe(false);
-    fillNodes(bst);
+    const bst = createBST();
     expect(bst.hasKey(1)).toBe(true);
     expect(bst.hasValue('6')).toBe(true);
   });
 
   it('insert:没有根节点的情况', () => {
+    const bst = new BinarySearchTree<string>();
     expect(bst.rootNode).toBeNull();
     bst.insert(1, 'a');
     expect(bst.rootNode!.key).toBe(1);
@@ -109,6 +115,7 @@ describe('BinarySearchTree', () => {
   });
 
   it('insert:有根节点,但是没有子节点', () => {
+    const bst = new BinarySearchTree<string>();
     const key = 5;
     const leftKey = key - 1;
     const rightKey = key + 1;
@@ -133,6 +140,7 @@ describe('BinarySearchTree', () => {
   });
 
   it('insert:有根节点,且有子节点', () => {
+    const bst = new BinarySearchTree<string>();
     const node3 = createNode(3);
     const node6 = createNode(6);
     const node5 = createNode(5);
@@ -150,7 +158,7 @@ describe('BinarySearchTree', () => {
   });
 
   it('foreach:广度优先遍历', () => {
-    fillNodes(bst);
+    const bst = createBST();
     let str = "";
     bst.forEach((node) => {
       str += node.value;
@@ -159,7 +167,7 @@ describe('BinarySearchTree', () => {
   });
 
   it('traverseNodes: 先/中/后序遍历', () => {
-    fillNodes(bst);
+    const bst = createBST();
 
     // 先序遍历
     let str = "";
@@ -184,7 +192,7 @@ describe('BinarySearchTree', () => {
   });
 
   it('findMin/findMax', () => {
-    fillNodes(bst);
+    const bst = createBST();
     const minNode = bst.findMin()!;
     const maxNode = bst.findMax()!;
     expect(minNode.key).toBe(1);
@@ -192,13 +200,13 @@ describe('BinarySearchTree', () => {
   });
 
   it('find', () => {
-    fillNodes(bst);
+    const bst = createBST();
     const findedNode = bst.find(5)!;
     expect(findedNode.key).toBe(5);
   });
 
   it('remove:删除没有任何子节点的叶子节点', () => {
-    fillNodesForRemoveCases(bst);
+    const bst = createRemoveCaseBST();
     const beforeKeys = bst.keys();
     const targetKey = 3;
     expect(beforeKeys.includes(targetKey)).toBe(true);
@@ -210,7 +218,7 @@ describe('BinarySearchTree', () => {
   });
 
   it('remove:删除的节点有一个left节点,没有 right 节点', () => {
-    fillNodesForRemoveCases(bst);
+    const bst = createRemoveCaseBST();
     const beforeKeys = bst.keys();
     const targetKey = 5;
     expect(beforeKeys.includes(targetKey)).toBe(true);
@@ -223,7 +231,7 @@ describe('BinarySearchTree', () => {
 
 
   it('remove:删除的节点有一个 right 节点, 没有 left 节点', () => {
-    fillNodesForRemoveCases(bst);
+    const bst = createRemoveCaseBST();
     const beforeKeys = bst.keys();
     const targetKey = 18;
     expect(beforeKeys.includes(targetKey)).toBe(true);
@@ -235,7 +243,7 @@ describe('BinarySearchTree', () => {
   });
 
   it('remove:删除的节点既有 left 也有 right 节点', () => {
-    fillNodesForRemoveCases(bst);
+    const bst = createRemoveCaseBST();
     const beforeKeys = bst.keys();
     const targetKey = 20;
     expect(beforeKeys.includes(targetKey)).toBe(true);

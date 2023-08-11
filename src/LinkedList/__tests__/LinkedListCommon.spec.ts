@@ -1,30 +1,29 @@
 import LinkedList from "../LinkedList";
 
+function createLinkedList() {
+  const linkedList = new LinkedList<string>();
+  // 填充一些链表节点用于测试
+  const aNode: LinkedNode<string> = {
+    value: 'a',
+    next: null,
+  };
+  const bNode: LinkedNode<string> = {
+    value: 'b',
+    next: null,
+  };
+  const cNode: LinkedNode<string> = {
+    value: 'c',
+    next: null,
+  };
+  aNode.next = bNode;
+  bNode.next = cNode;
+  linkedList.head = aNode;
+  linkedList.tail = cNode;
+  linkedList.length = 3;
+  return linkedList;
+}
+
 describe('Linked common methods', () => {
-  let linkedList: LinkedList<string>;
-
-  beforeEach(() => {
-    linkedList = new LinkedList<string>();
-    // 填充一些链表节点用于测试
-    const aNode: LinkedNode<string> = {
-      value: 'a',
-      next: null,
-    };
-    const bNode: LinkedNode<string> = {
-      value: 'b',
-      next: null,
-    };
-    const cNode: LinkedNode<string> = {
-      value: 'c',
-      next: null,
-    };
-    aNode.next = bNode;
-    bNode.next = cNode;
-    linkedList.head = aNode;
-    linkedList.tail = cNode;
-    linkedList.length = 3;
-  });
-
   it('size', () => {
     // size 直接返回 linkedList 的 length 属性
     const ll = new LinkedList<string>();
@@ -50,6 +49,7 @@ describe('Linked common methods', () => {
   });
 
   it('append', () => {
+    const linkedList = createLinkedList();
     let len = linkedList.length;
     linkedList.append('append-item');
     expect(linkedList.tail!.value).toBe('append-item');
@@ -57,6 +57,7 @@ describe('Linked common methods', () => {
   });
 
   it('prepend', () => {
+    const linkedList = createLinkedList();
     let len = linkedList.length;
     linkedList.prepend('prepend-item');
     expect(linkedList.head!.value).toBe('prepend-item');
@@ -64,6 +65,7 @@ describe('Linked common methods', () => {
   });
 
   it('getNode', () => {
+    const linkedList = createLinkedList();
     expect(linkedList.getNode(0)!.value).toBe('a');
     expect(linkedList.getNode(1)!.value).toBe('b');
     expect(linkedList.getNode(2)!.value).toBe('c');
@@ -72,6 +74,7 @@ describe('Linked common methods', () => {
   });
 
   it('setNode', () => {
+    const linkedList = createLinkedList();
     linkedList.setNode(0, 'first-item');
     expect(linkedList.head!.value).toBe('first-item');
 
@@ -81,6 +84,7 @@ describe('Linked common methods', () => {
   });
 
   it('forEach', () => {
+    const linkedList = createLinkedList();
     let str = '';
     linkedList.forEach((item) => {
       str += item.value;
@@ -89,6 +93,7 @@ describe('Linked common methods', () => {
   });
 
   it('indexOf', () => {
+    const linkedList = createLinkedList();
     expect(linkedList.indexOf('a')).toBe(0);
     expect(linkedList.indexOf('b')).toBe(1);
     expect(linkedList.indexOf('c')).toBe(2);
@@ -99,11 +104,13 @@ describe('Linked common methods', () => {
   });
 
   it('remove', () => {
+    const linkedList = createLinkedList();
     linkedList.remove('b');
     expect(linkedList.indexOf('b')).toBe(-1);
   });
 
   it('clear', () => {
+    const linkedList = createLinkedList();
     linkedList.clear();
     expect(linkedList.size()).toBe(0);
   });

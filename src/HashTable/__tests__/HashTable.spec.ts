@@ -2,13 +2,8 @@ import HashTable from "../HashTable";
 
 describe('HashTable', () => {
 
-  let hashTable: HashTable<string>;
-  beforeEach(() => {
-    hashTable = new HashTable<string>();
-  });
-
-
   it('set/get', () => {
+    const hashTable = new HashTable<string>();
     hashTable.set("a", "hello");
     hashTable.set("b", "world");
     const aValue = hashTable.get("a");
@@ -19,6 +14,7 @@ describe('HashTable', () => {
 
 
   it('delete', () => {
+    const hashTable = new HashTable<string>();
     hashTable.set("a", "hello");
     hashTable.set("b", "world");
     hashTable.set("c", "hash table");
@@ -27,6 +23,7 @@ describe('HashTable', () => {
   });
 
   it('has', () => {
+    const hashTable = new HashTable<string>();
     hashTable.set("a", "hello");
     hashTable.set("b", "world");
 
@@ -40,6 +37,7 @@ describe('HashTable', () => {
   });
 
   it('clear', () => {
+    const hashTable = new HashTable<string>();
     hashTable.set("a", "hello");
     hashTable.set("b", "world");
     expect(hashTable.get("a")).toBe("hello");

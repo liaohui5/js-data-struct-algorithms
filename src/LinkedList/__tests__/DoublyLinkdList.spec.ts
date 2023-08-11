@@ -1,35 +1,36 @@
 import DoublyLinkedList from "../DoublyLinkedList";
 
+function createDoublyLinkedList() {
+  const dll = new DoublyLinkedList<string>();
+  const aNode: DoublyLinkedNode<string> = {
+    value: 'a',
+    next: null,
+    prev: null,
+  };
+  const bNode: DoublyLinkedNode<string> = {
+    value: 'b',
+    next: null,
+    prev: null,
+  };
+  const cNode: DoublyLinkedNode<string> = {
+    value: 'c',
+    next: null,
+    prev: null,
+  };
+  aNode.next = bNode;
+  bNode.next = cNode;
+  bNode.prev = aNode;
+  cNode.prev = bNode;
+  dll.head = aNode;
+  dll.tail = cNode;
+  dll.length = 3;
+  return dll;
+}
+
+
 describe('DoublyLinkedList', () => {
-  let dll: DoublyLinkedList<string>;
-  beforeEach(() => {
-    dll = new DoublyLinkedList<string>();
-    const aNode: DoublyLinkedNode<string> = {
-      value: 'a',
-      next: null,
-      prev: null,
-    };
-    const bNode: DoublyLinkedNode<string> = {
-      value: 'b',
-      next: null,
-      prev: null,
-    };
-    const cNode: DoublyLinkedNode<string> = {
-      value: 'c',
-      next: null,
-      prev: null,
-    };
-    aNode.next = bNode;
-    bNode.next = cNode;
-    bNode.prev = aNode;
-    cNode.prev = bNode;
-    dll.head = aNode;
-    dll.tail = cNode;
-    dll.length = 3;
-  });
-
-
   it('createNode', () => {
+    const dll = new DoublyLinkedList<string>();
     const node = dll.createNode('x');
     expect(node.value).toBe('x');
   });
@@ -44,6 +45,7 @@ describe('DoublyLinkedList', () => {
   });
 
   it('insert:链表不为空,在最前面插入节点', () => {
+    const dll = createDoublyLinkedList();
     const len = dll.length;
     const insertValue = 'insert-value';
     dll.insert(0, insertValue);
@@ -56,6 +58,7 @@ describe('DoublyLinkedList', () => {
   });
 
   it('insert:链表不为空,在最后面插入节点', () => {
+    const dll = createDoublyLinkedList();
     const len = dll.length;
     const insertValue = 'insert-value';
     dll.insert(dll.length, insertValue);
@@ -68,6 +71,7 @@ describe('DoublyLinkedList', () => {
   });
 
   it('insert:超出链表范围', () => {
+    const dll = createDoublyLinkedList();
     const len = dll.length;
     expect(() => dll.insert(11, 'x')).toThrow(/out of range/);
     expect(dll.length).toBe(len);
@@ -75,6 +79,7 @@ describe('DoublyLinkedList', () => {
 
 
   it('removeAt:移除最前面的节点', () => {
+    const dll = createDoublyLinkedList();
     const len = dll.length;
     dll.removeAt(0);
     expect(dll.head!.value).toBe('b');
@@ -82,6 +87,7 @@ describe('DoublyLinkedList', () => {
   });
 
   it('removeAt:移除最后面的节点', () => {
+    const dll = createDoublyLinkedList();
     const len = dll.length;
     dll.removeAt(dll.length - 1);
     expect(dll.tail!.value).toBe('b');
@@ -89,6 +95,7 @@ describe('DoublyLinkedList', () => {
   });
 
   it('removeAt:移除中间的节点', () => {
+    const dll = createDoublyLinkedList();
     const len = dll.length;
     dll.removeAt(1);
     expect(dll.head!.next!.value).toBe('c');
@@ -96,6 +103,7 @@ describe('DoublyLinkedList', () => {
   });
 
   it('removeAt:超出范围', () => {
+    const dll = createDoublyLinkedList();
     const len = dll.length;
     expect(() => dll.removeAt(5)).toThrow(/out of range/);
     expect(dll.length).toBe(len);

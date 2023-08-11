@@ -1,8 +1,8 @@
 /**
  * 栈是一种受限的线性数据结构,相较于数组来说只能后进先出
  */
-export default class Stack<T> {
-  private items: T[] = [];
+export default class Stack<T> implements Stack<T>{
+  public items: T[] = [];
 
   /**
    * 从其他可迭代数据中解构元素构建栈
