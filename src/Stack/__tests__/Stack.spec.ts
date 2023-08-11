@@ -12,7 +12,6 @@ function createStack(fillItems: number = 0): Stack<number> {
   return stack;
 }
 
-
 describe("stack", () => {
   it("from", () => {
     const stk = Stack.from<number>([2, 4, 6]);

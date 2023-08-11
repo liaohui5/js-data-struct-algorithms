@@ -27,7 +27,7 @@ function createBST() {
   return bst;
 }
 
-// 填充测试删除需要的节点, fillNodes 节点太少无法测试删除方法的所有情况
+// 填充测试删除需要的节点, createBST 节点太少无法测试删除方法的所有情况
 // 而测试其他的方法又不需要这么多的数据, 否则影响测试用例的性能
 // 如果阅读/调试源码, 建议看这个图来调试, 程序走到哪个步骤了
 // https://raw.githubusercontent.com/liaohui5/images/main/images/20230710224450.png
